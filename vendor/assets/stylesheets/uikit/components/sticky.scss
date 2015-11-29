@@ -1,16 +1,34 @@
-/*! UIkit 2.20.3 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+// Name:            Sticky
+// Description:     Make elements remain at the top of the viewport
+//
+// Component:       `data-uk-sticky`
+//
+// States:          `uk-active`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$sticky-z-index:                                 980 !default;
+
+$sticky-animation-duration:                      0.2s !default;
+$sticky-reverse-animation-duration:              0.2s !default;
+
+
 /* ========================================================================
    Component: Sticky
  ========================================================================== */
+
 /*
  * 1. More robust if padding and border are used
  */
 
 [data-uk-sticky].uk-active {
-  z-index: 980;
-  /* 1 */
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+   z-index: $sticky-z-index;
+   /* 1 */
+   box-sizing: border-box;
 }
 
 /*
@@ -18,22 +36,29 @@
  */
 
 .uk-sticky-placeholder > * {
-  /* 1 */
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+    /* 1 */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 /*
  * Faster animations
  */
 
-[data-uk-sticky] {
-  &[class*='uk-animation-'] {
-    -webkit-animation-duration: 0.15s;
-    animation-duration: 0.15s;
-  }
-  &.uk-animation-reverse {
-    -webkit-animation-duration: 0.04s;
-    animation-duration: 0.04s;
-  }
+[data-uk-sticky][class*='uk-animation-'] {
+    -webkit-animation-duration: $sticky-animation-duration;
+    animation-duration: $sticky-animation-duration;
 }
+
+[data-uk-sticky].uk-animation-reverse {
+    -webkit-animation-duration: $sticky-reverse-animation-duration;
+    animation-duration: $sticky-reverse-animation-duration;
+}
+
+
+// Hooks
+// ========================================================================
+
+@include hook-sticky-misc();
+
+// @mixin hook-sticky-misc(){}
